@@ -4,7 +4,7 @@ import { useProducts } from '../context/ProductsContext'
 import ProductCard from '../components/ProductCard'
 
 function Home() {
-  const { products } = useProducts()
+  const { products, loading } = useProducts()
   const [searchParams] = useSearchParams()
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -42,7 +42,12 @@ function Home() {
 
            <div className="max-w-[1600px] mx-auto px-6 py-10">
                 
-        {filteredProducts.length === 0 ? (
+               {loading ? (
+          <div className="text-center mt-12">
+            <div className="inline-block w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-gray-500 mt-3">Loading products...</p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <p className="text-center text-gray-500 mt-12">
             No products match your search.
           </p>
